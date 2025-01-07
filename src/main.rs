@@ -14,6 +14,13 @@ fn main() {
   println!("slice1 = {slice1}");
   
   s4.clear();
+
+  let rect = Rectangle {
+    width: 10,
+    height: 20
+  };
+  println!("rect is {:#?}", &rect);
+  dbg!(&rect);
 }
 
 fn calculate_length(s: &String) -> usize {
@@ -32,4 +39,10 @@ fn first_word(s: &mut String) -> &str {
     }
   }
   &s[..]
+}
+
+#[derive(Debug)]
+struct Rectangle {
+  width: u32,
+  height: u32
 }
