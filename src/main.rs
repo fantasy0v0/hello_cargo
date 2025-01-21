@@ -1,5 +1,7 @@
 
 fn main() {
+  let a = "";
+
   let s1 = String::from("Hello World");
   let s2 = &s1;
   let s3 = &s1;
@@ -12,8 +14,6 @@ fn main() {
   println!("s5 = {s5}");
   let slice1 = first_word(&mut s4);
   println!("slice1 = {slice1}");
-  
-  s4.clear();
 
   let rect = Rectangle {
     width: 10,
