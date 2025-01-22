@@ -1,48 +1,24 @@
 
 fn main() {
-  let a = "";
-
-  let s1 = String::from("Hello World");
-  let s2 = &s1;
-  let s3 = &s1;
-  println!("s2 = {s2}, s3 = {s3}");
-  
-  calculate_length(s3);
-
-  let mut s4 = String::from("Hello World");
-  let s5 = &s4;
-  println!("s5 = {s5}");
-  let slice1 = first_word(&mut s4);
-  println!("slice1 = {slice1}");
-
-  let rect = Rectangle {
-    width: 10,
-    height: 20
+  let mut user = User {
+    name: "John".to_string(),
+    id: 1
   };
-  println!("rect is {:#?}", &rect);
-  dbg!(&rect);
+  user.name = "Jane".to_string();
+  // 如果不clone，user.name的所有权会被转移到user2.name，导致user.name无法被使用
+  let user2 = User {
+    id: 2,
+    name: user.name.clone()
+  };
+  let ret = user.name == user2.name;
+  println!("user.name == user2.name = {}", ret);
+  println!("user.name = {}", user.name);
 }
 
-fn calculate_length(s: &String) -> usize {
-  let iter = s.as_bytes().iter();
-  for (index, &value) in iter.enumerate() {
-    println!("index = {}, value = {}", index, value)
-  }
-  1
-}
+struct User {
 
-fn first_word(s: &mut String) -> &str {
-  let bytes = s.as_bytes();
-  for (i, &item) in bytes.iter().enumerate() {
-    if item == b' ' {
-        return &s[0..i];
-    }
-  }
-  &s[..]
-}
+  id: i32,
 
-#[derive(Debug)]
-struct Rectangle {
-  width: u32,
-  height: u32
+  name: String
+
 }
