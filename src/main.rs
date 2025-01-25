@@ -1,24 +1,48 @@
-
-fn main() {
-  let mut user = User {
-    name: "John".to_string(),
-    id: 1
-  };
-  user.name = "Jane".to_string();
-  // 如果不clone，user.name的所有权会被转移到user2.name，导致user.name无法被使用
-  let user2 = User {
-    id: 2,
-    name: user.name.clone()
-  };
-  let ret = user.name == user2.name;
-  println!("user.name == user2.name = {}", ret);
-  println!("user.name = {}", user.name);
+enum Message {
+  Quit,
+  Move { x: i32, y: i32 },
+  Write(String),
+  ChangeColor(i32, i32, i32),
 }
 
-struct User {
+impl Message {
+  fn call(&self) {
+      // 在这里定义方法体
+      match self {
+         Message::Write(s) => println!("Write: {}", s),
+          _ => println!("Other message"),
+      }
+  }  
+}
 
-  id: i32,
+enum Coin {
+  Penny,
+  Nickel,
+  Dime,
+  Quarter,
+}
 
-  name: String
+fn value_in_cents(coin: Coin) -> u8 {
+  match coin {
+      Coin::Penny => 1,
+      Coin::Nickel => 5,
+      Coin::Dime => 10,
+      Coin::Quarter => 25,
+  }
+}
 
+fn main() {
+
+  let m = Message::Write(String::from("test"));
+  m.call();
+
+  let coin = Coin::Penny;
+  println!("Value in cents: {}", value_in_cents(coin));
+  
+  let config_max = Some(3u8);
+  if let None = config_max {
+      println!("None");
+      return;
+  }
+  println!("Some: {}", config_max.unwrap());
 }
