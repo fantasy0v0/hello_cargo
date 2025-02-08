@@ -25,3 +25,9 @@ pub fn test1() {
   let x = 6;
   println!("x = {x}");
 }
+
+pub mod test11 {
+  pub fn test11() {
+    println!("test11");
+  }
+}
