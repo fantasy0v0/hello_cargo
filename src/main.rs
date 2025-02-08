@@ -1,3 +1,5 @@
+mod test1;
+
 enum Message {
   Quit,
   Move { x: i32, y: i32 },
@@ -40,9 +42,11 @@ fn main() {
   println!("Value in cents: {}", value_in_cents(coin));
   
   let config_max = Some(3u8);
-  if let None = config_max {
-      println!("None");
-      return;
+  if let Some(a) = config_max {
+    println!("Some: {}", a);
+  } else {
+    println!("None");
+    return;
   }
-  println!("Some: {}", config_max.unwrap());
+  test1::test1();
 }
