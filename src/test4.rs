@@ -1,4 +1,4 @@
-mod test1;
+use crate::test1;
 
 enum Message {
   Quit,
