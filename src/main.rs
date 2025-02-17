@@ -32,6 +32,7 @@ fn main() {
     None => println!("没有值")
   }
   let c = &v[123];
+  // 第8章第1节
 }
 
 fn test(o1: Option<&mut i32>) {
