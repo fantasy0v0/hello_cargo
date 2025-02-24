@@ -1,3 +1,5 @@
+use std::fs;
+
 
 
 fn main() {
@@ -31,8 +33,22 @@ fn main() {
     Some(bv) => println!("有值，是: {}", bv),
     None => println!("没有值")
   }
-  let c = &v[123];
+  let c = &v[6];
   // 第8章第1节
+
+  let mut v = vec![123, 222, 333];
+  for i in &mut v {
+    *i += 5;
+  }
+  for i in &v {
+    println!("{}", i);
+  }
+
+  let s1 = String::from("hello");
+  let s2 = String::from("world");
+  let s3 = s1 + &s2;
+  // let s4 = format!("{} {}", s1, s2); // error! s1 is moved here
+  // 第八章第3节
 }
 
 fn test(o1: Option<&mut i32>) {
