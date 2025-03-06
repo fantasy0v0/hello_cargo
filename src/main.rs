@@ -1,6 +1,7 @@
 use std::fs;
 
 
+use std::collections::HashMap;
 
 fn main() {
   let mut vec: Vec<i32> = Vec::new();
@@ -33,25 +34,38 @@ fn main() {
     Some(bv) => println!("有值，是: {}", bv),
     None => println!("没有值")
   }
-  let c = &v[6];
+  // let c = &v[123];
   // 第8章第1节
-
-  let mut v = vec![123, 222, 333];
-  for i in &mut v {
-    *i += 5;
+  let s1 = String::from("😀Hello Cargo");
+  // let slice1 = &s1[0..1];
+  // println!("{}", slice1);
+  for _c in s1.chars() {
+    println!("{}", _c);
   }
-  for i in &v {
-    println!("{}", i);
+  let mut map = HashMap::<String, i32>::new();
+  map.insert(String::from("Blue"), 123);
+  map.insert(String::from("Red"), 456);
+  // map.insert(String::from("Blue"), 789);
+  for (key, value) in &map {
+    println!("{}: {}", key, value);
   }
+  map.iter().for_each(|(key, value)| {
+    println!("{}: {}", key, value);
+  });
 
-  let s1 = String::from("hello");
-  let s2 = String::from("world");
-  let s3 = s1 + &s2;
-  // let s4 = format!("{} {}", s1, s2); // error! s1 is moved here
-  // 第八章第3节
+  let j = "hello world wonderful world";
+  let mut words = HashMap::<&str, i32>::new();
+
+  for word in j.split_whitespace() {
+    let count = words.entry(word).or_insert(0);
+    *count += 1;
+  }
+  for (word, count) in &words {
+    println!("{} : {}", &word, &count);
+  }
 }
 
 fn test(o1: Option<&mut i32>) {
   let a = o1.unwrap();
-  *a = 123;
+  *a = *a * 2;
 }
