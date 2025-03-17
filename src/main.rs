@@ -32,7 +32,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
   }
 }
 
-fn test<'a>(x: &'a i32, y: &'a i32, z: &i32) -> &'a i32 {
+fn test<'a, T: PartialOrd>(x: &'a T, y: &'a T, z: &T) -> &'a T {
   if x > y {
     x
   } else {
