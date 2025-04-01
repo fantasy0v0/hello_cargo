@@ -31,7 +31,11 @@ pub fn parse_config(args: &[String]) -> Config {
 pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
   // let contents = fs::read_to_string(config.file_path).expect("Should have been able to read to file");
   let contents = fs::read_to_string(config.file_path)?;
-  println!("file contents: \n{}", contents);
+  // println!("file contents: \n{}", contents);
+  let results = search(&config.query, &contents);
+  for line in results {
+    println!("{}", line);
+  }
   Ok(())
 }
 
