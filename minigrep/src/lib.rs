@@ -3,6 +3,7 @@ use std::{env, error::Error, fs};
 pub struct Config {
   pub query: String,
   pub file_path: String,
+  pub ignore_case: bool
 }
 
 impl Config {
@@ -22,9 +23,11 @@ impl Config {
 }
 
 pub fn parse_config(args: &[String]) -> Config {
+  let ignore_case = env::var("IGNORE_CASE").is_ok();
   Config {
     query: args[1].clone(),
     file_path: args[2].clone(),
+    ignore_case
   }
 }
 
@@ -32,7 +35,11 @@ pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
   // let contents = fs::read_to_string(config.file_path).expect("Should have been able to read to file");
   let contents = fs::read_to_string(config.file_path)?;
   // println!("file contents: \n{}", contents);
-  let results = search(&config.query, &contents);
+  let results = if config.ignore_case {
+    search_case_insensitive(&config.query, &contents)
+  } else {
+    search(&config.query, &contents)
+  };
   for line in results {
     println!("{}", line);
   }
