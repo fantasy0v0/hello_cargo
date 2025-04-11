@@ -20,6 +20,23 @@ fn main() {
   // test(list);
   println!("After calling closure: {list:?}");
   // 闭包会更还回借用的所有权
+  let mut aa = 111;
+  test_FnMut(|a| {
+    aa += a;
+    aa
+  });
+  println!("aa: {}", aa);
+  // Fn 可重复调用, 但不能修改外部的值
+  // FnMut 可重复调用, 可修改外部的值
+  // FnOnce 不可重复调用, 可修改外部的值
+}
+
+fn test_FnMut<T>(mut a: T) -> i32
+where T: FnMut(i32) -> i32 {
+  let b = 123;
+  let c = a(b);
+  println!("b: {}, c: {}", b, c);
+  c
 }
 
 fn test(vec: Vec<i32>) {
