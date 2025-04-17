@@ -5,3 +5,10 @@ edition = "2021"
 
 [dependencies]
 rand = "0.8.5"
+
+# 如果需要使用工作区的话，需要把上面的内容都注释掉
+# [workspace]
+# members = [
+#   "adder",
+#  "minigrep",
+# ]
