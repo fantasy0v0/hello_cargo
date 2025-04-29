@@ -1,3 +1,4 @@
+use std::ops::Deref;
 
 fn main() {
   let b = Box::new(5);
@@ -21,4 +22,18 @@ fn main() {
 enum List{
   Cons(i32, Box<List>),
   Nil,
+}
+
+trait Test<T> {
+  fn test(&self) -> &T;
+}
+
+struct Fan<T> {
+  data: T
+}
+
+impl <T> Test<T> for Fan<T>  {
+  fn test(&self) -> &T {
+    return &self.data; 
+  }
 }
