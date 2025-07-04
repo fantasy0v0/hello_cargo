@@ -11,7 +11,8 @@ fn main() {
     .spawn()
     .expect("ping failed to start");  
   // let out = result.wait_with_output().expect("ping failed to wait");
-  result.wait().expect("ping failed to wait");
+  let status = result.wait().expect("ping failed to wait");  
+  println!("process: {}, code: {} success:{}", result.id(), status.code().unwrap_or_default(), status.success());
   // println!("输出: {}", String::from_utf8_lossy(&out.stdout));
   println!("执行结束!");
 }
