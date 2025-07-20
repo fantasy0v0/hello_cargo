@@ -8,6 +8,12 @@ pub fn read_line(prompt: &str) -> String {
   input
 }
 
+pub fn read_password(prompt: &str) -> String {
+  io::stdout().write(prompt.as_bytes()).expect("输出失败");
+  io::stdout().flush().expect("flush失败");
+  return rpassword::read_password().expect("密码输入失败");
+}
+
 pub fn write_line(data: &str) {
   io::stdout().write(data.as_bytes()).expect("输出失败");
   io::stdout().flush().expect("flush失败");
