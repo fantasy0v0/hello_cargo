@@ -18,14 +18,14 @@ impl User {
 
 #[cfg(test)]
 mod tests {
-    use super::*;
+  use super::*;
 
-    #[test]
-    fn user_matches() {
-        let user = User::new("admin", "123456");
-        let result = user.matches("admin", "123456");
-        assert_eq!(result, true);
-        let result = user.matches("admin", "654321");
-        assert_eq!(result, false);
-    }
+  #[test]
+  fn user_matches() {
+    let user = User::new("admin", "123456");
+    let result = user.matches("admin", "123456");
+    assert_eq!(result, true);
+    let result = user.matches("admin", "654321");
+    assert_eq!(result, false);
+  }
 }
